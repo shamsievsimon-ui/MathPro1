@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MathPro — математический тренажёр по тригонометрии, прямым и геометрии">
+<title>MathPro — математический тренажёр</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2d;--panel2:#18233b;--text:#f4f7ff;--muted:#a9b6d0;--blue:#72a7ff;--green:#5fe0b1;--pink:#e6a4ff;--yellow:#ffd479;--border:#2c3b59}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 10% 0%,#1a2d50 0,transparent 34%),var(--bg);color:var(--text);min-height:100vh}
+header{max-width:1100px;margin:auto;padding:28px 20px 12px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--pink));display:grid;place-items:center;color:#10172a;font-weight:900;font-size:22px}.brand h1{font-size:25px;margin:0;letter-spacing:.5px}.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}
+.pill{border:1px solid var(--border);border-radius:999px;padding:9px 13px;color:var(--muted);font-size:13px}
+main{max-width:1100px;margin:auto;padding:18px 20px 50px}.hero{padding:28px;border:1px solid var(--border);border-radius:24px;background:linear-gradient(120deg,rgba(114,167,255,.13),rgba(230,164,255,.08));display:grid;grid-template-columns:1.5fr .8fr;gap:22px;align-items:center}
+.hero h2{font-size:clamp(28px,4vw,44px);line-height:1.06;margin:0 0 12px}.hero p{color:var(--muted);max-width:650px;line-height:1.6;margin:0}.hero-art{min-height:140px;display:grid;place-items:center;font-size:64px;letter-spacing:8px;color:var(--blue)}
+.section-title{margin:30px 0 14px;font-size:20px}.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.topic{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:20px;cursor:pointer;transition:.18s;min-height:180px}.topic:hover{transform:translateY(-3px);border-color:var(--blue)}.topic .emoji{font-size:30px}.topic h3{margin:12px 0 7px}.topic p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.topic .go{display:inline-block;margin-top:16px;color:var(--blue);font-weight:700;font-size:13px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:24px;margin-top:22px}.hidden{display:none!important}.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.back{border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:9px 12px;cursor:pointer}.progress{height:8px;border-radius:99px;background:#25324c;overflow:hidden;margin:17px 0}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));transition:width .2s}.meta{color:var(--muted);font-size:13px}.question{font-size:clamp(21px,3vw,28px);font-weight:750;line-height:1.35;margin:18px 0}.formula{font-size:clamp(25px,4vw,35px);color:var(--yellow);text-align:center;padding:14px 6px}.answers{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.answer{background:var(--panel2);border:1px solid var(--border);color:var(--text);padding:15px;border-radius:13px;text-align:left;font-size:16px;cursor:pointer}.answer:hover:not(:disabled){border-color:var(--blue)}.answer:disabled{cursor:default}.answer.correct{border-color:var(--green);background:rgba(95,224,177,.13)}.answer.wrong{border-color:#ff7e8b;background:rgba(255,126,139,.12)}.feedback{margin-top:15px;border-radius:12px;padding:14px;background:var(--panel2);line-height:1.5}.feedback.good{border:1px solid var(--green)}.feedback.bad{border:1px solid #ff7e8b}.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;flex-wrap:wrap}.primary{border:0;background:linear-gradient(100deg,var(--blue),#9cc2ff);color:#0b1020;font-weight:800;border-radius:12px;padding:12px 18px;cursor:pointer}.primary:disabled{opacity:.4;cursor:not-allowed}.result{text-align:center;padding:22px}.score{font-size:58px;font-weight:900;color:var(--green);margin:10px}.result p{color:var(--muted);line-height:1.6}.stats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px}.stat{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:14px 18px;min-width:120px}.stat b{display:block;font-size:22px}.stat small{color:var(--muted)}.foot{color:var(--muted);text-align:center;font-size:12px;margin-top:32px;line-height:1.6}
+@media(max-width:720px){.hero{grid-template-columns:1fr}.hero-art{min-height:60px;font-size:44px}.topics{grid-template-columns:1fr}.topic{min-height:auto}.answers{grid-template-columns:1fr}header{padding-top:18px}.card{padding:18px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="logo">M</div><div><h1>MathPro</h1><p>Математический тренажёр</p></div></div>
+ <div class="pill">3 темы · мгновенная проверка · результат</div>
+</header>
+<main>
+ <section id="home">
+  <div class="hero"><div><h2>Математика —<br>это тренировка</h2><p>Выбирай тему, решай задания и проверяй себя. В конце тренировки ты увидишь результат и сможешь разобрать ошибки.</p></div><div class="hero-art" aria-hidden="true">∠ △ π</div></div>
+  <h2 class="section-title">Выбери тему</h2>
+  <div class="topics">
+   <button class="topic" data-topic="trig"><div class="emoji">📐</div><h3>Тригонометрия</h3><p>Синус, косинус, тангенс и значения основных углов.</p><span class="go">Начать тренировку →</span></button>
+   <button class="topic" data-topic="lines"><div class="emoji">📏</div><h3>Свойства прямых</h3><p>Параллельные и перпендикулярные прямые, углы при пересечении.</p><span class="go">Начать тренировку →</span></button>
+   <button class="topic" data-topic="geometry"><div class="emoji">🧊</div><h3>Площади и объёмы</h3><p>Площади фигур и объёмы пространственных тел.</p><span class="go">Начать тренировку →</span></button>
+  </div>
+  <div class="card"><h3>Как пользоваться</h3><ol style="color:var(--muted);line-height:1.8"><li>Нажми на нужную тему.</li><li>Выбери один ответ из четырёх вариантов.</li><li>Прочитай объяснение после проверки.</li><li>В конце посмотри результат и попробуй ещё раз.</li></ol></div>
+ </section>
+ <section id="quiz" class="card hidden">
+  <div class="topline"><button class="back" id="backBtn">← К темам</button><div class="meta" id="topicLabel"></div></div>
+  <div class="progress"><span id="progressBar"></span></div>
+  <div class="topline"><span class="meta" id="questionCount"></span><span class="meta" id="scoreLabel">Верно: 0</span></div>
+  <div id="question" class="question"></div><div id="formula" class="formula"></div>
+  <div id="answers" class="answers"></div><div id="feedback" class="feedback hidden" aria-live="polite"></div>
+  <div class="actions"><button id="nextBtn" class="primary" disabled>Следующий вопрос →</button></div>
+ </section>
+ <section id="result" class="card hidden"><div class="result"><div style="font-size:42px">🏁</div><h2>Тренировка завершена!</h2><div id="finalScore" class="score">0/10</div><p id="resultText"></p><div class="stats"><div class="stat"><b id="percent">0%</b><small>Точность</small></div><div class="stat"><b id="rightCount">0</b><small>Верных ответов</small></div><div class="stat"><b id="wrongCount">0</b><small>Ошибок</small></div></div><div class="actions" style="justify-content:center"><button id="retryBtn" class="primary">Пройти ещё раз</button><button id="homeBtn" class="back">Выбрать другую тему</button></div></div></section>
+ <div class="foot">MathPro · учебный проект<br>Тренажёр работает в браузере. Ответы проверяются на устройстве; данные не отправляются на сервер.</div>
+</main>
+<script>
+const BANK = {
+trig: [
+ {q:"Чему равен sin 30°?",f:"sin 30° = ?",a:["0,5","1","0","√3/2"],c:0,e:"Синус 30° равен 1/2, то есть 0,5."},
+ {q:"Чему равен cos 60°?",f:"cos 60° = ?",a:["√3/2","0","0,5","1"],c:2,e:"Косинус 60° равен 1/2, то есть 0,5."},
+ {q:"Чему равен sin 90°?",f:"sin 90° = ?",a:["0","1","−1","0,5"],c:1,e:"На единичной окружности синус 90° равен 1."},
+ {q:"Чему равен cos 0°?",f:"cos 0° = ?",a:["0","−1","0,5","1"],c:3,e:"Косинус нулевого угла равен 1."},
+ {q:"Как записывается основное тригонометрическое тождество?",f:"",a:["sin x + cos x = 1","sin²x + cos²x = 1","sin x · cos x = 1","sin²x − cos²x = 1"],c:1,e:"Для любого угла x выполняется sin²x + cos²x = 1."},
+ {q:"Чему равен tan 45°?",f:"tan 45° = ?",a:["0","√3","1","1/2"],c:2,e:"tan 45° = sin 45° / cos 45° = 1."},
+ {q:"Как связаны тангенс, синус и косинус (если cos x ≠ 0)?",f:"",a:["tan x = cos x / sin x","tan x = sin x / cos x","tan x = sin x + cos x","tan x = sin x · cos x"],c:1,e:"Тангенс равен отношению синуса к косинусу."},
+ {q:"Чему равен cos 90°?",f:"cos 90° = ?",a:["1","−1","0","√3/2"],c:2,e:"Косинус 90° равен 0."},
+ {q:"Чему равен sin 0°?",f:"sin 0° = ?",a:["1","0","−1","0,5"],c:1,e:"Синус нулевого угла равен 0."},
+ {q:"В прямоугольном треугольнике синус острого угла — это…",f:"",a:["прилежащий катет / гипотенуза","противолежащий катет / гипотенуза","гипотенуза / катет","отношение двух гипотенуз"],c:1,e:"Синус острого угла равен отношению противолежащего катета к гипотенузе."}
+],
+lines: [
+ {q:"Как называются две прямые на плоскости, которые никогда не пересекаются?",f:"",a:["Перпендикулярные","Пересекающиеся","Параллельные","Наклонные"],c:2,e:"Параллельные прямые в одной плоскости не пересекаются."},
+ {q:"Какой угол образуют перпендикулярные прямые?",f:"",a:["45°","90°","180°","60°"],c:1,e:"Перпендикулярные прямые пересекаются под прямым углом 90°."},
+ {q:"Сумма смежных углов равна…",f:"",a:["90°","180°","270°","360°"],c:1,e:"Смежные углы образуют развёрнутый угол, поэтому их сумма 180°."},
+ {q:"Вертикальные углы…",f:"",a:["всегда разные","в сумме равны 90°","равны","в сумме равны 360°"],c:2,e:"Вертикальные углы равны между собой."},
+ {q:"Один из смежных углов равен 125°. Чему равен второй?",f:"",a:["125°","65°","55°","45°"],c:1,e:"180° − 125° = 55°? Проверим: 180 − 125 = 55°. Правильный ответ — 55°.",fix:true},
+ {q:"Если при пересечении двух прямых один из углов равен 38°, то вертикальный ему угол равен…",f:"",a:["142°","38°","90°","52°"],c:1,e:"Вертикальные углы равны, поэтому второй угол тоже 38°."},
+ {q:"Если две прямые перпендикулярны третьей прямой на плоскости, то они…",f:"",a:["параллельны","пересекаются под 45°","обязательно совпадают","не имеют общего свойства"],c:0,e:"Две прямые, перпендикулярные одной и той же прямой на плоскости, параллельны."},
+ {q:"При пересечении параллельных прямых секущей соответственные углы…",f:"",a:["всегда в сумме 180°","равны","всегда прямые","равны 45°"],c:1,e:"Если прямые параллельны, соответственные углы равны."},
+ {q:"Развёрнутый угол равен…",f:"",a:["90°","180°","270°","360°"],c:1,e:"Развёрнутый угол равен 180°."},
+ {q:"Один из вертикальных углов равен 72°. Чему равен другой?",f:"",a:["108°","36°","72°","118°"],c:2,e:"Вертикальные углы равны, значит второй угол — 72°."}
+],
+geometry: [
+ {q:"Как найти площадь прямоугольника со сторонами 5 см и 3 см?",f:"S = ?",a:["8 см²","15 см²","16 см²","30 см²"],c:1,e:"Площадь прямоугольника S = a · b = 5 · 3 = 15 см²."},
+ {q:"Площадь квадрата со стороной 4 см равна…",f:"S = a²",a:["8 см²","12 см²","16 см²","20 см²"],c:2,e:"S = 4² = 16 см²."},
+ {q:"Найди площадь треугольника с основанием 10 см и высотой 6 см.",f:"S = ½ · a · h",a:["60 см²","30 см²","16 см²","20 см²"],c:1,e:"S = 1/2 · 10 · 6 = 30 см²."},
+ {q:"Чему равна площадь круга радиусом 3 см?",f:"S = πr²",a:["6π см²","9π см²","3π см²","12π см²"],c:1,e:"S = π · 3² = 9π см²."},
+ {q:"Объём куба с ребром 2 см равен…",f:"V = a³",a:["4 см³","6 см³","8 см³","12 см³"],c:2,e:"V = 2³ = 8 см³."},
+ {q:"Найди объём прямоугольного параллелепипеда 2 × 3 × 4 см.",f:"V = a · b · c",a:["9 см³","12 см³","24 см³","24 см²"],c:2,e:"V = 2 · 3 · 4 = 24 см³."},
+ {q:"Площадь круга с радиусом r вычисляется по формуле…",f:"",a:["S = 2πr","S = πr²","S = a³","S = πd"],c:1,e:"Площадь круга равна πr². Формула 2πr описывает длину окружности."},
+ {q:"Объём цилиндра с радиусом основания r и высотой h равен…",f:"",a:["πrh","2πr²h","πr²h","πr²"],c:2,e:"Объём цилиндра равен площади основания πr², умноженной на высоту h."},
+ {q:"Найди площадь параллелограмма с основанием 7 см и высотой 4 см.",f:"S = a · h",a:["11 см²","22 см²","28 см²","14 см²"],c:2,e:"S = 7 · 4 = 28 см²."},
+ {q:"Объём конуса равен…",f:"",a:["πr²h","⅓πr²h","2πrh","πrh²"],c:1,e:"Объём конуса равен одной трети произведения площади основания на высоту: V = ⅓πr²h."}
+]
+};
+// Correct a common trap in generated bank: second supplementary angle is 55°.
+BANK.lines[4].a = ["125°","65°","55°","45°"];
+BANK.lines[4].c = 2;
+BANK.lines[4].e = "Смежные углы в сумме дают 180°. 180° − 125° = 55°.";
+const names={trig:"Тригонометрия",lines:"Свойства прямых",geometry:"Площади и объёмы"};
+let currentTopic="", questions=[], index=0, score=0, locked=false;
+const $=id=>document.getElementById(id);
+function show(id){["home","quiz","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id));}
+function start(topic){currentTopic=topic;questions=[...BANK[topic]].sort(()=>Math.random()-.5);index=0;score=0;locked=false;$("topicLabel").textContent=names[topic];show("quiz");render();}
+function render(){locked=false;const q=questions[index];$("questionCount").textContent=`Вопрос ${index+1} из ${questions.length}`;$("scoreLabel").textContent=`Верно: ${score}`;$("progressBar").style.width=`${index/questions.length*100}%`;$("question").textContent=q.q;$("formula").textContent=q.f||"";$("formula").style.display=q.f?"block":"none";$("answers").innerHTML="";$("feedback").className="feedback hidden";$("nextBtn").disabled=true;$("nextBtn").textContent=index===questions.length-1?"Показать результат →":"Следующий вопрос →";q.a.forEach((ans,i)=>{const b=document.createElement("button");b.className="answer";b.textContent=String.fromCharCode(65+i)+". "+ans;b.onclick=()=>choose(i);$("answers").appendChild(b);});}
+function choose(choice){if(locked)return;locked=true;const q=questions[index];const buttons=[...$("answers").children];buttons.forEach((b,i)=>{b.disabled=true;if(i===q.c)b.classList.add("correct");if(i===choice&&i!==q.c)b.classList.add("wrong");});const good=choice===q.c;if(good)score++;$("scoreLabel").textContent=`Верно: ${score}`;$("feedback").className="feedback "+(good?"good":"bad");$("feedback").innerHTML=`<strong>${good?"Верно! ✓":"Пока неверно."}</strong><br>${q.e}`;$("nextBtn").disabled=false;$("progressBar").style.width=`${(index+1)/questions.length*100}%`;}
+function next(){if(!locked)return;if(index<questions.length-1){index++;render();}else finish();}
+function finish(){show("result");const total=questions.length,p=Math.round(score/total*100);$("finalScore").textContent=`${score} / ${total}`;$("percent").textContent=p+"%";$("rightCount").textContent=score;$("wrongCount").textContent=total-score;$("resultText").textContent=p>=90?"Отлично! Ты уверенно знаешь тему. Попробуй пройти её ещё раз для закрепления.":p>=70?"Хороший результат! Повтори вопросы, в которых ошибся, и попробуй улучшить результат.":"Это хорошая возможность потренироваться. Повтори правила и формулы, затем пройди тест ещё раз.";}
+document.querySelectorAll("[data-topic]").forEach(b=>b.addEventListener("click",()=>start(b.dataset.topic)));
+$("backBtn").onclick=()=>show("home");$("nextBtn").onclick=next;$("retryBtn").onclick=()=>start(currentTopic);$("homeBtn").onclick=()=>show("home");
+</script>
+</body>
+</html>
